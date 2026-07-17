@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/yak1dango/Projectx/blog remote -v)",
+      "Read(//Users/yak1dango/.agents/skills/cloudflare/references/pages/**)",
+      "Read(//Users/yak1dango/.agents/skills/cloudflare/references/static-assets/**)",
+      "Bash(ls /Users/yak1dango/.claude/skills/cloudflare/references/wrangler/ 2>/dev/null && ls /Users/yak1dango/.claude/skills/cloudflare/references/static-assets/)",
+      "Bash(npm ls *)",
+      "Bash(node -p \"require\\('./package.json'\\).devDependencies\")",
+      "Bash(npx astro *)",
+      "Bash(lsof -ti:4321)",
+      "Bash(xargs kill -9)"
+    ]
+  }
+}
