@@ -1,7 +1,7 @@
 ---
-title: 'Beancount usage review - 2026 Mid Review'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+title: 'Beancount usage review - 2026 Review'
+description: 'My Beancount repo setup for managing hundreds of accounts and thousands of transactions, and my monthly update routine, as of 2026.'
+pubDate: 'Jul 17 2026'
 ---
 
 I started using [Beancount](https://github.com/beancount/beancount/) on Dec 29, 2025, and have been back-porting all my accounts and transactions, including historical ones. As of today, I have 388 total accounts, 269 open accounts, and 15,512 transactions.
@@ -10,7 +10,9 @@ I have about 10 years of financial history, having opened and closed many accoun
 
 ## Principles
 
-Use checks (balance, close) to enforce conformity.
+* Use checks (`balance`, `close`, plugins like `check_commodity`) to enforce conformity.
+
+* Organize accounts, data, and journals by account name.
 
 ## Repo Setup
 
@@ -63,7 +65,7 @@ Details:
 
     * `balances.beancount` contains balance statements.
 
-    * `not-be-used.beancount` contains close statements for accounts that are not yet closed, e.g. `3000-01-01 close Liabilities:Mortgage:CA:BMO:180k:Revolving-087`.
+    * `not-be-used.beancount` contains close statements for accounts that are not yet closed, e.g. `3000-01-01 close Liabilities:Mortgage:Foo3`.
 
 ### `data/`
 
@@ -103,12 +105,22 @@ On the 1st of each month, I manually follow markdown instructions:
 
 1. Log in to the financial institution.
 1. Download statements for the past month and save to the corresponding account directory in `data/`.
-1. Run import scripts: `uv run python -m tools.import extract data/Assets:Brokerage:Foo0/ > journals/Assets:Brokerage:Foo0.beancount`.
+1. Run import scripts:
+    ```sh
+    uv run python -m tools.import extract \
+        data/Assets:Brokerage:Foo0/ \
+        > journals/Assets:Brokerage:Foo0.beancount
+    ```
 1. Commit and continue to the next account.
 
 A few things break the standard flow:
 
-* Running import on all files in a data sub-directory sometimes triggers too many manual edits — e.g. historical transactions without easily-parsable data files, or incorrectly categorized/uncategorized posting accounts for past transactions. In these cases: `uv run python -m tools.import extract data/Assets:Brokerage:Foo0/Bar.csv >> journals/Assets:Brokerage:Foo0.beancount`.
+* Running import on all files in a data sub-directory sometimes triggers too many manual edits — e.g. historical transactions without easily-parsable data files, or incorrectly categorized/uncategorized posting accounts for past transactions. In these cases:
+    ```sh
+    uv run python -m tools.import extract \
+        data/Assets:Brokerage:Foo0/Bar.csv \
+        >> journals/Assets:Brokerage:Foo0.beancount
+    ```
 
 * Some accounts, especially credit cards, don't offer statement downloads for a full calendar month — only by statement period. The latest transactions end up either in a partial statement overlapping next month, or unavailable for download. Options:
 
@@ -122,6 +134,6 @@ A few things break the standard flow:
 
 ### Note
 
-* Plaid makes automating monthly updates easier, but is expensive given the number of open accounts.
+* Plaid makes automating monthly updates easier, but is costly given the number of open accounts.
 
 * AI agents are hard to use for automating monthly updates due to short-lived sessions.
