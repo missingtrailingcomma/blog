@@ -1,5 +1,5 @@
 ---
-title: 'Beancount usage review - 2026 Review'
+title: 'Beancount Usage Review - 2026'
 description: 'My Beancount repo setup for managing hundreds of accounts and thousands of transactions, and my monthly update routine, as of 2026.'
 pubDate: 'Jul 17 2026'
 ---
