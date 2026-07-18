@@ -8,11 +8,29 @@ import Header from '../components/Header.astro';
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate } = Astro.props;
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: pubDate.toISOString(),
+	...(updatedDate && { dateModified: updatedDate.toISOString() }),
+	url: Astro.url.toString(),
+	mainEntityOfPage: Astro.url.toString(),
+};
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			type="article"
+			publishDate={pubDate}
+			updatedDate={updatedDate}
+		/>
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 		<style>
 			.title {
 				margin-bottom: 1.5em;

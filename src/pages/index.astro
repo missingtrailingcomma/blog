@@ -48,6 +48,7 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<main>
 			<section>
+				<h1 class="sr-only">{SITE_TITLE}</h1>
 				<ul>
 					{
 						posts.map((post) => (
