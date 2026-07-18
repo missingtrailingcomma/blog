@@ -13,6 +13,27 @@
 	--font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif;
 	--font-serif: "Iowan Old Style", Charter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
+@media (prefers-color-scheme: dark) {
+	:root {
+		--accent: #6d80ff;
+		--black: 234, 234, 234;
+		--gray: 154, 154, 154;
+		--gray-light: 45, 45, 47;
+		--bg: 17, 17, 18;
+	}
+}
+.astro-code,
+.astro-code span {
+	color: var(--shiki-light);
+	background-color: var(--shiki-light-bg);
+}
+@media (prefers-color-scheme: dark) {
+	.astro-code,
+	.astro-code span {
+		color: var(--shiki-dark);
+		background-color: var(--shiki-dark-bg);
+	}
+}
 body {
 	font-family: var(--font-serif);
 	margin: 0;
